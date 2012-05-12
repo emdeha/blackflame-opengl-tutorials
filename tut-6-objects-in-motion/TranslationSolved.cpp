@@ -181,35 +181,6 @@ glm::mat4 OvalOffsetMat(float fElapsedTime)
 
 	return theMatRot * theMatTrans * theMatRotOrient * theMatScale;
 }
-
-glm::mat4 BottomCircleOffsetMat(float fElapsedTime)
-{
-	const float fLoopDuration = 3.0f;
-	const float fScale = 3.14159f * 2.0f / fLoopDuration;
-
-	float fCurrTimeThroughLoop = fmodf(fElapsedTime, fLoopDuration);
-
-	glm::mat4 theMatRot(1.0f);
-	glm::mat4 theMatRotOrient(1.0f);
-	glm::mat4 theMatTrans(1.0f);
-	glm::mat4 theMatTransRound(1.0f);
-
-	theMatTrans[3] = glm::vec4(0.0f, -3.5f, -20.0f, 1.0f);
-	theMatTransRound[3] = glm::vec4(5.0f, 0.0f, 0.0f, 1.0f);
-	 
-	theMatRot[0].x = cosf(fCurrTimeThroughLoop * fScale);
-	theMatRot[0].z = -sinf(fCurrTimeThroughLoop * fScale);
-	theMatRot[2].x = sinf(fCurrTimeThroughLoop * fScale);
-	theMatRot[2].z = cosf(fCurrTimeThroughLoop * fScale);
-
-
-	theMatRotOrient[0].x = cosf(-fCurrTimeThroughLoop * fScale);
-	theMatRotOrient[0].z = -sinf(-fCurrTimeThroughLoop * fScale);
-	theMatRotOrient[2].x = sinf(-fCurrTimeThroughLoop * fScale);
-	theMatRotOrient[2].z = cosf(-fCurrTimeThroughLoop * fScale);
-
-	return theMatTrans * theMatRot * theMatTransRound * theMatRotOrient;
-}
 //**** 
 
 struct Instance
